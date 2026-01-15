@@ -1,0 +1,52 @@
+<%- include('layout') %>
+
+<h2>Invoices</h2>
+<form action="/new" method="GET">
+  <button type="submit" style="background: green;">Create Invoice</button>
+</form>
+
+<div class="no-print" style="margin:15px -10px;">
+  <a href="/?show=active" class="button <%= show==='active'?'active':'' %>">Active (<%= counts.ACTIVE %>)</a>
+  <a href="/?show=cancelled" class="button <%= show==='cancelled'?'active':'' %>">Cancelled (<%= counts.CANCELLED %>)</a>
+  <a href="/?show=all" class="button <%= show==='all'?'active':'' %>">All (<%= counts.ACTIVE + counts.CANCELLED %>)</a>
+</div>
+
+
+<ul>
+  <% invoices.forEach(inv => { %>
+
+    <li class="<%= inv.status === 'CANCELLED' ? 'cancelled' : '' %>">
+      <div>
+        Invoice <b><%= inv.invoice_number %></b> —
+        <%= inv.client %> —
+        Balance ₹<%= inv.balance %>
+
+        <% if (inv.status === 'CANCELLED') { %>
+          <span class="badge">CANCELLED</span>
+        <% } %>
+      </div>
+
+      <div class="no-print">
+        <form action="/invoice/<%= inv.invoice_number %>" method="GET" style="display:inline;">
+          <button type="submit">View</button>
+        </form>
+        <form action="/pdf/<%= inv.invoice_number %>" method="GET" style="display:inline;">
+          <button type="submit">PDF</button>
+        </form>
+
+        <% if (inv.status !== 'CANCELLED') { %>
+          <form action="/cancel/<%= inv.invoice_number %>" method="POST" style="display:inline;"
+                onsubmit="return confirm('Cancel this invoice?');">
+            <button type="submit" class="danger" style="background: purple;">Cancel</button>
+          </form>
+        <% } %>
+
+        <form action="/delete/<%= inv.invoice_number %>" method="POST" style="display:inline;"
+              onsubmit="return confirm('Delete this invoice permanently?');">
+          <button type="submit" style="background:#dc2626;">Delete</button>
+        </form>
+      </div>
+    </li>
+
+  <% }) %>
+</ul>

@@ -1,0 +1,25 @@
+<%- include('layout') %>
+
+<form action="/" method="GET">
+  <button class="no-print" type="submit" style="background: forestgreen;">Home</button>
+</form>
+
+<h2>Create Invoice</h2>
+
+<form method="POST">
+  <label>Client Name</label><br>
+  <input name="client" required><br><br>
+
+  <label>Total Amount</label><br>
+  <input name="total" required><br><br>
+
+  <label>
+    <input type="checkbox" name="inst">
+    Enable Installments
+  </label><br><br>
+
+  <label>No. of Months (if enabled)</label><br>
+  <input name="months"><br><br>
+
+  <button type="submit">Create Invoice</button>
+</form>

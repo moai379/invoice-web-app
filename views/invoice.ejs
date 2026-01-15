@@ -1,0 +1,49 @@
+<%- include('layout', { title: 'Invoice #' + invoice.invoice_number }) %>
+
+<form class="no-print" action="/" method="GET">
+  <button type="submit" style="background: forestgreen;">Home</button>
+</form>
+
+<% if (invoice.status === 'CANCELLED') { %>
+  <div class="cancel-watermark">CANCELLED</div>
+<% } %>
+
+<img src="/assets/logo.png" height="60">
+
+<h2>Standard Invoice</h2>
+
+<p><b>Invoice No:</b> <%= invoice.invoice_number %></p>
+<p><b>Client:</b> <%= invoice.client %></p>
+<p><b>Total:</b> ₹<%= invoice.total %></p>
+<p><b>Paid:</b> ₹<%= invoice.paid %></p>
+<p><b>Balance:</b> ₹<%= invoice.balance %></p>
+
+<% if (installments.length > 0) { %>
+  <div class="page-break">
+    <h3>Installment Schedule</h3>
+
+    <table border="1" width="100%">
+      <tr>
+        <th>S.No</th>
+        <th>Total Amount</th>
+        <th>Paid Amount</th>
+        <th>Due On</th>
+        <th>Paid On</th>
+      </tr>
+
+      <% installments.forEach((row, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td>₹<%= row.amount %></td>
+          <td><%= row.paid_on ? '₹' + row.amount : '-' %></td>
+          <td><%= row.due_on %></td>
+          <td><%= row.paid_on || '-' %></td>
+        </tr>
+      <% }) %>
+    </table>
+  </div>
+<% } %>
+
+<br><br>
+<img src="/assets/signature.png" height="50">
+<p>Authorized Signatory</p>

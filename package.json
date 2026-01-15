@@ -1,0 +1,14 @@
+{
+  "name": "invoice-web-app",
+  "version": "2.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^4.19.2",
+    "puppeteer": "^22.8.0",
+    "sqlite3": "^5.1.7"
+  }
+}
