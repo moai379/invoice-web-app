@@ -81,9 +81,9 @@ INV-2026-000002
 Invoice PDFs are stored locally using a client-wise and year-wise directory structure: 
 ```yaml
 invoices/
-  aysen_management/
-    2026/
-      aysen_management_INV-2026-000123.pdf
+  {client_name}/
+    {year}/
+      {client_name}_INV-{year}-000123.pdf
 ```
 ---
 
