@@ -2,3 +2,4 @@ node_modules/
 invoices/
 database.db
 assets/
+views/terms.ejs
